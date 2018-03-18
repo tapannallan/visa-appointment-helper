@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Set root_folder to the directory which contains run.sh
-root_folder="/home/tapan/consulatecheck"
+root_folder="/mnt/d/Dev/Workspace/visa-appointment-helper"
 consulate_details="locationCode=banga&realmId=210&categoryId=337"
 rescheduling_token="29257ad8e9a87cc43eb84110692509a1"
 
@@ -9,6 +9,7 @@ rescheduling_token="29257ad8e9a87cc43eb84110692509a1"
 #DO NOT EDIT THESE
 consulate_base_url="https://service2.diplo.de/rktermin/extern/appointment_showMonth.do"
 rescheduling_base_url="https://service2.diplo.de/rktermin/extern/appointment_showDay.do"
+booking_base_url="https://service2.diplo.de/rktermin/extern/appointment_showForm.do"
 host="https://service2.diplo.de/rktermin"
 
 #https://service2.diplo.de/rktermin/extern/appointment_showMonth.do?locationCode=banga&realmId=210&categoryId=337&rebooking=true&token="

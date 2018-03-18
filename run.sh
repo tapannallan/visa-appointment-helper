@@ -71,20 +71,21 @@ if [ "$available_date" != "NONE" ]; then
     #Get Appointment time selection page
     curl -v -L -s -S -b target/cookies -c target/cookies -o target/appointmentschedulingpage.html "$rescheduling_base_url?$consulate_details&dateStr=$available_date&rebooking=true&token=$rescheduling_token"
 
-    tt=$(python3 lib/extract_resch_appt_url.py $root_folder "appointmentschedulingpage.html")
-
-    echo $tt
-
-    resch_appt_url=$host/$tt
-    
+    resch_appt_url=$host/$(python3 lib/extract_resch_appt_url.py $root_folder "appointmentschedulingpage.html")
     echo "booking url is $resch_appt_url" >> $log_file
 
-    # #Solve Captcha
-    # solve_captcha "appointmentschedulingpage.html" "appointment_captcha_day"
-    
-    # echo $solution
+    #Fetch final booking page
+    curl -v -L -s -S -b target/cookies -c target/cookies -o target/bookfinalappt.html "$resch_appt_url"
 
-    echo -e "Booking appointment for $available_date" >> $log_file
+    #Extract booking time
+    booking_time=$(python3 lib/extract_booking_time.py $root_folder "bookfinalappt.html")
+
+    #Solve Captcha
+    solve_captcha "bookfinalappt.html" "rebook_captcha"
+    
+    echo $solution
+
+    echo -e "Booking appointment for $booking_time" >> $log_file
 
 else
     echo Need to notify : False >> $log_file
