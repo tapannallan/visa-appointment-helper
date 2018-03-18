@@ -18,19 +18,14 @@ with open(htmlfilepath) as htmlfile:
         tokens = elem.text.strip().split(" ")
         date_tokens = tokens[1].split(".")
         
-        #If date is in march, notify
-        if(int(date_tokens[1]) == 3):
+        #If date is in march, and greater than 24
+        if(int(date_tokens[1]) == 3 and int(date_tokens[0]) > 24):
             do_notify = True
             available_date = '.'.join(date_tokens)
             break;
 
         #if date is in april and before april 24, notify
         if(int(date_tokens[1]) == 4 and int(date_tokens[0]) < 24):
-            do_notify = True
-            available_date = '.'.join(date_tokens)
-            break;
-
-        if(int(date_tokens[1]) == 6 and int(date_tokens[0]) == 8):
             do_notify = True
             available_date = '.'.join(date_tokens)
             break;

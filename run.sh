@@ -1,5 +1,23 @@
 #!/bin/bash
 
+extract_time_period()
+{
+    searchtext=$1
+
+    saveIFS=$IFS
+    IFS='=&'
+    params=($searchtext)
+    IFS=$saveIFS
+
+    declare -A array
+    for ((i=0; i<${#params[@]}; i+=2))
+    do
+        array[${params[i]}]=${params[i+1]}
+    done
+
+    time_period=${array["openingPeriodId"]}
+}
+
 solve_captcha()
 {
     captcha_page=$1
@@ -58,10 +76,10 @@ if [ "$available_date" != "NONE" ]; then
     echo -e "Sending Cloud Messaging Request to notify android phone." >> $log_file
     
     #Notify Tapan's phone
-    curl -X POST -H "Content-Type:application/x-www-form-urlencoded" https://llamalab.com/automate/cloud/message -d "secret=1.qUcPcUsCv78yEP1aJqh2ZoraZ4dhjxOE-CLr2PblAxY%3D&to=tapanc.nallan%40gmail.com&device=&payload=Hello%20World" > /dev/null
+    curl -X POST -H "Content-Type:application/x-www-form-urlencoded" https://llamalab.com/automate/cloud/message -d "secret=1.qUcPcUsCv78yEP1aJqh2ZoraZ4dhjxOE-CLr2PblAxY%3D&to=tapanc.nallan%40gmail.com&device=&payload=tapan" > /dev/null
 
     #Notify Priya's phone
-    #curl -X POST -H "Content-Type:application/x-www-form-urlencoded" https://llamalab.com/automate/cloud/message -d "secret=1.qUcPcUsCv78yEP1aJqh2ZoraZ4dhjxOE-CLr2PblAxY%3D&to=tapanc.nallan%40gmail.com&device=&payload=Hello%20World"
+    curl -X POST -H "Content-Type:application/x-www-form-urlencoded" https://llamalab.com/automate/cloud/message -d "secret=1.sMIGzZjzBFnoToqw7iuiCRKgBenLAyTBCKnBeRHbFzs%3D&to=priyav.999%40gmail.com&device=&payload=tapan" > /dev/null
 
     
     #****** Automatically book the appointment ********
@@ -80,13 +98,15 @@ if [ "$available_date" != "NONE" ]; then
     #Extract booking time
     booking_time=$(python3 lib/extract_booking_time.py $root_folder "bookfinalappt.html")
 
+    #Extract openingPeriodId
+    extract_time_period "$resch_appt_url"
+
     #Solve Captcha
     solve_captcha "bookfinalappt.html" "rebook_captcha"
-    
-    echo $solution
-
     echo -e "Booking appointment for $booking_time" >> $log_file
 
+    #Book Appointment
+    curl -X POST -v -L -s -S -F request_locale=en -F captchaText=$solution -F locationCode=banga -F realmId=210 -F categoryId=337 -F openingPeriodId=$time_period -F date=$available_date -F dateStr=$available_date -F rebooking=true -F token=$rescheduling_token -F action:appointment_rebookAppointment=Submit -b target/cookies -c target/cookies -o target/bookingdone.html "$booking_base_url"
 else
     echo Need to notify : False >> $log_file
 fi
