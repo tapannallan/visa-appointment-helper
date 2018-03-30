@@ -5,9 +5,9 @@ from bs4 import BeautifulSoup
 import base64
 
 root_folder = sys.argv[1]
-boking_html_filename = sys.argv[2]
+booking_html_filename = sys.argv[2]
 
-htmlfilepath = os.path.join(root_folder,"target",boking_html_filename)
+htmlfilepath = os.path.join(root_folder,"target",booking_html_filename)
 
 with open(htmlfilepath) as htmlfile:
 

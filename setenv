@@ -1,12 +1,26 @@
 #!/bin/bash
 
 #Set root_folder to the directory which contains run.sh
-root_folder="/d/Dev/Workspace/visa-appointment-helper"
+root_folder="/home/tapan/visa-appointment-helper"
 consulate_details="locationCode=chenn&realmId=407&categoryId=883"
 
-#DO NOT EDIT THESE
-cancellation_url=" https://service2.diplo.de/rktermin/extern/cancellation_form.do?reference=chenn_8865365&token=8ffe7602b4be27d65fc06dfbb30a17ef&request_locale=en&categoryId=883"
+cancellation_url="https://service2.diplo.de/rktermin/extern/cancellation_form.do?reference=chenn_8873141&token=f28b0ab60be283fbc332aceefadc974a&request_locale=en&categoryId=883"
+cancellation_ref="chenn_8873141"
+cancellation_token="f28b0ab60be283fbc332aceefadc974a"
 
+
+user_visa_type="Familienzusammenführung/ Family reunion"
+user_phone_number="9847474746"
+user_dob="1986-03-22"
+user_passportno="P2231565"
+user_email="sridhar.reddy@mailinator.com"
+user_firstname="Sridhar"
+user_lastname="Reddy"
+
+
+#DO NOT EDIT THESE
+appointment_time_page="https://service2.diplo.de/rktermin/extern/appointment_showDay.do"
+cancellation_base_url="https://service2.diplo.de/rktermin/extern/cancellation_executeCancellation.do"
 consulate_base_url="https://service2.diplo.de/rktermin/extern/appointment_showMonth.do"
 booking_base_url="https://service2.diplo.de/rktermin/extern/appointment_addAppointment.do"
 host="https://service2.diplo.de/rktermin"

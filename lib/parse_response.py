@@ -19,13 +19,13 @@ with open(htmlfilepath) as htmlfile:
         date_tokens = tokens[1].split(".")
         
         #If date is in march, and greater than 24
-        if(int(date_tokens[1]) == 3 and int(date_tokens[0]) > 24):
+        if(int(date_tokens[1]) == 3 and int(date_tokens[0]) > 30):
             do_notify = True
             available_date = '.'.join(date_tokens)
             break;
 
-        #if date is in april and before april 24, notify
-        if(int(date_tokens[1]) == 4 and int(date_tokens[0]) < 24):
+        #if date is in april
+        if(int(date_tokens[1]) == 4):
             do_notify = True
             available_date = '.'.join(date_tokens)
             break;
