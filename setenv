@@ -1,13 +1,12 @@
 #!/bin/bash
 
 #Set root_folder to the directory which contains run.sh
-root_folder="/home/tapan/visa-appointment-helper"
-consulate_details="locationCode=banga&realmId=210&categoryId=337"
-rescheduling_token="2dddssasdfvkoadausiva98fash9f1"
-
+root_folder="/d/Dev/Workspace/visa-appointment-helper"
+consulate_details="locationCode=chenn&realmId=407&categoryId=883"
 
 #DO NOT EDIT THESE
+cancellation_url=" https://service2.diplo.de/rktermin/extern/cancellation_form.do?reference=chenn_8865365&token=8ffe7602b4be27d65fc06dfbb30a17ef&request_locale=en&categoryId=883"
+
 consulate_base_url="https://service2.diplo.de/rktermin/extern/appointment_showMonth.do"
-rescheduling_base_url="https://service2.diplo.de/rktermin/extern/appointment_showDay.do"
-booking_base_url="https://service2.diplo.de/rktermin/extern/appointment_showForm.do"
+booking_base_url="https://service2.diplo.de/rktermin/extern/appointment_addAppointment.do"
 host="https://service2.diplo.de/rktermin"

@@ -63,10 +63,13 @@ solve_captcha "captchapage.html" "appointment_captcha_month"
 
 
 #Get HTML page with latest available dates
-curl -X POST -v -L -s -S -F request_locale=en -F captchaText=$solution -F locationCode=banga -F realmId=210 -F categoryId=337 -b target/cookies -c target/cookies -o target/response.html "$consulate_base_url"
+curl -X POST -v -L -s -S -F request_locale=en -F captchaText=$solution -F locationCode=chenn -F realmId=407 -F categoryId=883 -b target/cookies -c target/cookies -o target/response.html "$consulate_base_url"
 
 #Parse HTML and see if notification is required
 available_date=$(python3 lib/parse_response.py $root_folder)
+
+echo "Best Available Date is $available_date"
+exit
 
 if [ "$available_date" != "NONE" ]; then
     # Using Automate app in android to create a flow which waits for a cloud message
