@@ -36,3 +36,9 @@ This script uses the human captcha solver service, [deathbycaptcha](http://death
 ### Enhancements
 * Notify deathbycaptcha when captcha is wrong
 * Automatically book appointment instead of just notifying
+
+
+### Crontab
+* Open terminal and execute `crontab -e`
+* In the file, add a new line with this content: `*/5 * * * * bash /<path to the folder>/visa-appointment-helper/run.sh > /dev/null 2>&1`
+* Save the file
