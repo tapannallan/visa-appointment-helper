@@ -94,14 +94,17 @@ echo Starting Process at $(date "+%Y-%m-%d %H:%M:%S") >> $log_file
 rm -rf target
 mkdir target
 
-#Fetch Captcha Page from german consulate
+#Fetch Page to look for appointments alongwith captcha from german consulate
 link_to_look_for_appointments="$consulate_base_url?$consulate_details"
+echo "Link to look for appointments is $link_to_look_for_appointments" >> $log_file
+
 curl -v -L -s -S -b target/cookies -c target/cookies -o target/captchapage.html "$link_to_look_for_appointments"
 echo -e "Saved captchapage.html at target/captchapage.html alongwith cookies" >> $log_file
 
 #Wait for the page to be saved
 sleep 5
 
+#Solve captcha and post
 solve_captcha "captchapage.html" "appointment_captcha_month"
 
 #Get HTML page with latest available dates
@@ -119,18 +122,15 @@ if [ "$available_date" != "NONE" ]; then
     echo "Need to notify : True" >> $log_file
     echo -e "Sending Cloud Messaging Request to notify android phone." >> $log_file
     
-    #Notify Tapan's phone
-    curl -X POST -H "Content-Type:application/x-www-form-urlencoded" https://llamalab.com/automate/cloud/message -d "secret=1.qUcPcUsCv78yEP1aJqh2ZoraZ4dhjxOE-CLr2PblAxY%3D&to=tapanc.nallan%40gmail.com&device=&payload=tapan" > /dev/null
-
     #Notify Priya's phone
-    curl -X POST -H "Content-Type:application/x-www-form-urlencoded" https://llamalab.com/automate/cloud/message -d "secret=1.sMIGzZjzBFnoToqw7iuiCRKgBenLAyTBCKnBeRHbFzs%3D&to=priyav.999%40gmail.com&device=&payload=tapan" > /dev/null
-
+    curl -X POST -H "Content-Type:application/x-www-form-urlencoded" https://llamalab.com/automate/cloud/message -d "secret=1.nBsJWNWD22YNX6pWamDrvjsKh3QTckPAN1No53Dqvhc%3D&to=priyav.999%40gmail.com&device=&payload=tapan" > /dev/null
     
-    # Cancel Existing appointment
-    echo -e "Cancelling Appointment automatically..." >> $log_file
-    cancel_existing_appointment
-    echo -e "Cancellation request has been posted" >> $log_file
+    exit
 
+    # Cancel Existing appointment
+    #echo -e "Cancelling Appointment automatically..." >> $log_file
+    #cancel_existing_appointment
+    #echo -e "Cancellation request has been posted" >> $log_file
 
     
     # Automatically book the appointment
@@ -172,8 +172,7 @@ if [ "$available_date" != "NONE" ]; then
     -F emailrepeat="$user_email" \
     -F fields[0].content="$user_passportno" \
     -F fields[0].definitionId="2151" \
-    -F fields[0].index="0" \
-    -F fields1content="22.03.1986" \
+    -F fields[0].index="0" \    
     -F fields[1].content="$user_dob" \
     -F fields[1].definitionId="2152" \
     -F fields[1].index="1" \
@@ -200,7 +199,7 @@ if [ "$available_date" != "NONE" ]; then
     -o target/bookingdone.html \
     "$booking_base_url"
 else
-    echo Need to notify : False >> $log_file
+    echo "Need to notify : False" >> $log_file
 fi
 
 

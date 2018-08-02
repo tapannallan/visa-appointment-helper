@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Set root_folder to the directory which contains run.sh
-root_folder="/home/tapan/visa-appointment-helper"
+root_folder="/home/tapan/instances/shekhar/visa-appointment-helper"
 consulate_details="locationCode=chenn&realmId=407&categoryId=883"
 
 cancellation_url="https://service2.diplo.de/rktermin/extern/cancellation_form.do?reference=chenn_8873141&token=f28b0ab60be283fbc332aceefadc974a&request_locale=en&categoryId=883"
@@ -10,12 +10,12 @@ cancellation_token="f28b0ab60be283fbc332aceefadc974a"
 
 
 user_visa_type="Familienzusammenführung/ Family reunion"
-user_phone_number="9847474746"
-user_dob="1986-03-22"
-user_passportno="P2231565"
-user_email="sridhar.reddy@mailinator.com"
-user_firstname="Sridhar"
-user_lastname="Reddy"
+user_phone_number="9951814725"
+user_dob="1989-04-07"
+user_passportno="Z2126875"
+user_email="chandrashekhar.allam@mailinator.com"
+user_firstname="Chandrashekar"
+user_lastname="Allam"
 
 
 #DO NOT EDIT THESE
