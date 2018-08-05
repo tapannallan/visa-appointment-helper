@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Set root_folder to the directory which contains run.sh
-root_folder="/home/tapn/instances/ram/visa-appointment-helper"
+root_folder="/home/tapan/instances/ram/visa-appointment-helper"
 consulate_details="locationCode=newy&realmId=14&categoryId=52"
 
 cancellation_url="https://service2.diplo.de/rktermin/extern/cancellation_form.do?reference=chenn_8873141&token=f28b0ab60be283fbc332aceefadc974a&request_locale=en&categoryId=883"
