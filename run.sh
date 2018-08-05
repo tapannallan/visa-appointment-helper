@@ -105,7 +105,7 @@ sleep 5
 solve_captcha "captchapage.html" "appointment_captcha_month"
 
 #Get HTML page with latest available dates
-curl -X POST -v -L -s -S -F request_locale=en -F captchaText=$solution -F locationCode=chenn -F realmId=407 -F categoryId=883 -b target/cookies -c target/cookies -o target/response.html "$consulate_base_url"
+curl -X POST -v -L -s -S -F request_locale=en -F captchaText=$solution -F locationCode=newy -F realmId=14 -F categoryId=52 -b target/cookies -c target/cookies -o target/response.html "$consulate_base_url"
 
 #Parse HTML and see if notification is required
 available_date=$(python3 lib/parse_response.py $root_folder)
@@ -120,11 +120,9 @@ if [ "$available_date" != "NONE" ]; then
     echo -e "Sending Cloud Messaging Request to notify android phone." >> $log_file
     
     #Notify Tapan's phone
-    curl -X POST -H "Content-Type:application/x-www-form-urlencoded" https://llamalab.com/automate/cloud/message -d "secret=1.qUcPcUsCv78yEP1aJqh2ZoraZ4dhjxOE-CLr2PblAxY%3D&to=tapanc.nallan%40gmail.com&device=&payload=tapan" > /dev/null
+    curl -X POST -H "Content-Type:application/x-www-form-urlencoded" https://llamalab.com/automate/cloud/message -d "secret=1.1A0SW9M9Ggw5MtUgNyThOfQuNGE-jRJlgG3fELfN1YQ%3D&to=tapanc.nallan%40gmail.com&device=&payload=tapan" > /dev/null
 
-    #Notify Priya's phone
-    curl -X POST -H "Content-Type:application/x-www-form-urlencoded" https://llamalab.com/automate/cloud/message -d "secret=1.sMIGzZjzBFnoToqw7iuiCRKgBenLAyTBCKnBeRHbFzs%3D&to=priyav.999%40gmail.com&device=&payload=tapan" > /dev/null
-
+    exit
     
     # Cancel Existing appointment
     echo -e "Cancelling Appointment automatically..." >> $log_file
